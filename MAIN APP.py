@@ -46,8 +46,9 @@ st.markdown("""
         }
         
         /* 3. BUTTON STYLING */
-        div.stButton > button {
-            background-color: #9370DB !important; /* Lavender */
+        /* Secondary Buttons & Links (Default) */
+        div.stButton > button, div.stLinkButton > a {
+            background-color: #8A2BE2 !important; /* Darker Purple (BlueViolet) */
             color: white !important;
             border: none !important;
             font-weight: bold !important;
@@ -56,11 +57,26 @@ st.markdown("""
             height: 3em !important;
             width: 100%;
             margin-top: 10px;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-decoration: none !important;
         }
-        div.stButton > button:hover {
-            background-color: #8A2BE2 !important;
+        div.stButton > button:hover, div.stLinkButton > a:hover {
+            background-color: #9370DB !important; /* Lighter Purple (Lavender) */
             transform: scale(1.02);
             box-shadow: 0 0 10px #9370DB;
+            color: white !important;
+        }
+        
+        /* Primary Buttons (Green) */
+        div.stButton > button[kind="primary"] {
+            background-color: #2E8B57 !important; /* SeaGreen */
+            border: 1px solid #2E8B57 !important;
+        }
+        div.stButton > button[kind="primary"]:hover {
+            background-color: #3CB371 !important; /* MediumSeaGreen */
+            box-shadow: 0 0 10px #2E8B57;
         }
         
         /* 4. TEXT COLORS */
@@ -815,6 +831,12 @@ def show_confirmation_dialog():
         </div>
     """, unsafe_allow_html=True)
 
+    # Google Maps Verification Link
+    maps_url = f"https://www.google.com/maps/search/?api=1&query={c_lat},{c_lon}"
+    st.link_button("Verify on Google Maps 🗺️", maps_url, use_container_width=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+
     col1, col2 = st.columns(2)
     
     with col1:
@@ -823,7 +845,7 @@ def show_confirmation_dialog():
             st.rerun()
             
     with col2:
-        if st.button("Confirm & Run", type="primary", use_container_width=True):
+        if st.button("YES! These are Correct! ✅", type="primary", use_container_width=True):
             # Store current chart data for potential cover generation later
             st.session_state.chart_data = {
                 'name': c_name,
@@ -915,7 +937,7 @@ with st.container(border=True):
         generate_covers_clicked = st.button("📔 Generate PDF Covers", type="primary", use_container_width=True, key="btn_gen_covers_top")
 
     with b_col3:
-        if st.button("🚀 Generate Full Book", type="primary", use_container_width=True, key="btn_launch_dialog"):
+        if st.button("🚀 Generate Full Book", type="secondary", use_container_width=True, key="btn_launch_dialog"):
             show_confirmation_dialog()
 
     if find_coords_clicked:
