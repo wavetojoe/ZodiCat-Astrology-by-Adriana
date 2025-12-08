@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
+node_modules/
+dist/
+
+# Ignore generated pie charts
+assets/pie_charts/
