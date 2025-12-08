@@ -1119,7 +1119,7 @@ if st.session_state.generate_covers and st.session_state.chart_data:
         location = f"{city}, {state}, {country}" if state.strip() else f"{city}, {country}"
         
         # Check if InDesign template exists
-        template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "INDESIGN FILES", "Cover - AstroBookGenerator.indt")
+        template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "INDESIGN FILES", "Black & Blue Covers.indt")
         continue_processing = True
         
         if os.path.exists(template_path):
